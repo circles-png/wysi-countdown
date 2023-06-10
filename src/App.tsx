@@ -39,7 +39,7 @@ const App = () => {
           <span>to the next <span className='font-medium'>7:27 pm</span></span>
         </div>
       </div>
-      <footer className='text-slate-400 border-t border-slate-500 p-4 grow-0 shrink text-sm'>
+      <footer className='text-slate-400 border-t border-slate-500 p-4 grow-0 shrink'>
         by Matthew Li, <a
           href='https://github.com/circles-png'
           className='underline decoration-2 text-slate-300'
