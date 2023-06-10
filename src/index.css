@@ -6,3 +6,19 @@
     font-family: 'SpaceGrotesk';
     src: url('/fonts/SpaceGrotesk.ttf');
 }
+
+@layer base {
+    .bg-grid {
+        background-image:
+            linear-gradient(to right, rgb(148 163 184) 0px, transparent 1px),
+            linear-gradient(to bottom, rgb(148 163 184) 0px, rgb(15 23 42) 1px);
+        background-size: 20px 20px;
+        background-position: center;
+    }
+    .bg-fade {
+        background-image:
+            linear-gradient(to bottom, transparent 0%, rgb(15 23 42) 50%, transparent 100%),
+            linear-gradient(to right, transparent 0%, rgb(15 23 42) 50%, transparent 100%);
+        background-position: center;
+    }
+}
