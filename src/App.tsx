@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 
 const App = () => {
   const getTime = () => {
-    let diff = DateTime
+    const timeAM = DateTime
       .now()
       .plus({
         days: DateTime.now() > DateTime
@@ -18,10 +18,30 @@ const App = () => {
         hour  : 7,
         minute: 27,
         second: 0
-      })
-      .diff(DateTime.now(), [ 'hours', 'minutes', 'seconds' ])
-    diff = diff.set({ seconds: Math.ceil(diff.seconds) })
-    return diff.toHuman({ maximumFractionDigits: 0 })
+      }),
+          timePM = DateTime
+            .now()
+            .plus({
+              days: DateTime.now() > DateTime
+                .fromObject({
+                  hour  : 19,
+                  minute: 27
+                })
+                ? 1
+                : 0
+            })
+            .set({
+              hour  : 19,
+              minute: 27,
+              second: 0
+            })
+    let diffAM = timeAM.diff(DateTime.now(), [ 'hours', 'minutes', 'seconds' ]),
+        diffPM = timePM.diff(DateTime.now(), [ 'hours', 'minutes', 'seconds' ])
+    diffAM = diffAM.set({ seconds: Math.ceil(diffAM.seconds) })
+    diffPM = diffPM.set({ seconds: Math.ceil(diffPM.seconds) })
+    return (diffAM < diffPM
+      ? diffAM
+      : diffPM).toHuman({ maximumFractionDigits: 0 })
   },
         [ time, setTime ] = useState(getTime())
   useEffect(() => {
@@ -37,7 +57,7 @@ const App = () => {
             <span className='font-bold flex flex-col text-4xl sm:text-7xl'>
               {time.split(', ').map((section, index) => <span className='after:content-[","]' key={index}>{section}</span>)}
             </span>
-            <span>to the next <span className='font-medium'>7:27 pm</span></span>
+            <span>to the next <span className='font-medium'>7:27</span></span>
           </div>
         </div>
         <footer className='text-slate-400 border-t border-slate-500 p-4 grow-0 shrink backdrop-blur-sm'>
